@@ -1,4 +1,31 @@
-:root {
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50:  #e6f4ec;
+  --color-primary-100: #cceada;
+  --color-primary-200: #99d5b4;
+  --color-primary-300: #66c18f;
+  --color-primary-400: #33ac69;
+  --color-primary-500: #2e8b57;
+  --color-primary-600: #257146;
+  --color-primary-700: #1d5735;
+  --color-primary-800: #143d24;
+  --color-primary-900: #0b2213;
+  --color-primary-950: #06140c;
+
+  --color-accent-50:  #fdf9eb;
+  --color-accent-100: #fbf0c9;
+  --color-accent-200: #f6de93;
+  --color-accent-300: #f0cb5d;
+  --color-accent-400: #ebba37;
+  --color-accent-500: #d4af37;
+  --color-accent-600: #b4952f;
+  --color-accent-700: #947b27;
+  --color-accent-800: #74611f;
+  --color-accent-900: #554717;
+  --color-accent-950: #3e3410;
+}
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -39,4 +66,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
