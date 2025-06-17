@@ -4,9 +4,9 @@ export type Room = {
     description : string;
     price: number;
     room_type : string;
-    ammenities: string
+    amenities: string
     is_available : boolean;
-    max_guest : number;
+    max_guests : number;
     room_image: string;
 
 }

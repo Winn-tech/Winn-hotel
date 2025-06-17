@@ -1,0 +1,6 @@
+{
+    "workbench.editor.customLabels.patterns": {
+        "**/app/**/page.ts": "page: ${dirname}",
+        "**/app/**/page.js": "page: ${dirname}"
+    }
+}

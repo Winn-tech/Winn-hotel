@@ -41,7 +41,7 @@ const HotelHeroSection = () => {
             </p>
             
             {/* Search Bar */}
-            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 max-w-6xl mx-auto border border-white/20 shadow-2xl transform hover:scale-105 transition-all duration-500">
+            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 max-w-5xl mx-auto border border-white/20 shadow-2xl transform hover:scale-105 transition-all duration-500">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="relative group">
                   <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent-400 w-5 h-5 transition-all duration-300 group-hover:text-purple-300 group-hover:scale-110" />
