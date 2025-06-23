@@ -2,15 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import Image from 'next/image'
-import {logout, checkAuthStatus, login} from '@/app/_lib/actions'
+import {logout} from '@/app/_lib/actions'
+import {toast} from 'react-toastify'
+import { usePathname } from 'next/navigation'
+import { LogOut } from 'lucide-react';
+import { useMainContext } from './context'
 
 interface NavProperties {
   label : string
   link : string
 }
 
-import { usePathname } from 'next/navigation'
-import { LogOut } from 'lucide-react';
 
 
 const pages: NavProperties[] = [
@@ -21,14 +23,19 @@ const pages: NavProperties[] = [
 ]
 
 const Navbar = () => {
-const [isLogged, setIsLogged] = useState<boolean>(false);
- useEffect(() => {
-    const checkAuth = async () => {
-      const {isLoggedIn} = await checkAuthStatus();
-      setIsLogged(isLoggedIn);
+
+  const {isLoggedIn, setIsLoggedIn} = useMainContext();
+ 
+
+  const handlelogout = async () => {
+    try {
+      await logout();
+      setIsLoggedIn(false);
+      toast.success('Logout successful!');
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
-    checkAuth();
-  }, [])
+  }
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10 px-10">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-5">
@@ -52,8 +59,8 @@ const [isLogged, setIsLogged] = useState<boolean>(false);
             }
           </nav>
           <div className="flex items-center space-x-4">
-            {isLogged ? (
-              <button onClick={()=>logout()} className="text-primary-700 hover:text-accent-500">
+            {isLoggedIn ? (
+              <button onClick={handlelogout} className="text-primary-700 hover:text-accent-500">
                 <LogOut className='w-6 h-6' />
               </button>
             ) : (

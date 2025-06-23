@@ -1,5 +1,5 @@
 'use client'
-
+import { toast } from 'react-toastify';
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { login, signup } from '@/app/_lib/actions'
@@ -24,7 +24,9 @@ const Page = () => {
       options: {
         redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
       },
+      
     })
+    toast.success('Login successful! Welcome back.');
     if (error) {
       console.error('Error signing in with Google:', error.message)
       setError(error.message)
