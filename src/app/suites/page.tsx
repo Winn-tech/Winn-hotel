@@ -15,7 +15,7 @@ const Page = ({searchParams}:PageProps) => {
   return (
     <div>
         <h1 className='sm:text-4xl text-2xl my-5 text-primary-950 font-medium'>
-        Our luxury cabins
+        Our luxury Suites
       </h1>
       <p className='text-primary-950 text-lg  my-5'>
         Experience refined comfort in our beautifully designed suites, located in the heart of Lagos, 

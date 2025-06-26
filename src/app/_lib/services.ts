@@ -1,6 +1,6 @@
 import { error } from 'console';
 import {supabase} from '@/app/_lib/supabase';
-import { Room } from '../types';
+import { Room, Booking } from '../types';
 
 export const getRooms = async ():Promise<Room[]> =>{
     const { data: rooms, error } = await supabase
@@ -27,6 +27,21 @@ export const getSingleRoom = async (roomId: string): Promise<Room>=>{
     }
 
     return data as Room;
+}
 
+ export const createBooking = async (booking:Booking) =>{
+
+const { data, error } = await supabase
+  .from('bookings')
+  .insert([
+    booking
+  ])
+  .select()
+
+
+if (error) {
+    throw new Error(`Error fetching bookings: ${error.message}`);
+}
 
 }
+

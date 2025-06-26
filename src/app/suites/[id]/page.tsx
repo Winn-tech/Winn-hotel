@@ -8,6 +8,7 @@ import { TbUsers } from "react-icons/tb";
 
 import Image from 'next/image'
 import RoomReservation from '@/app/components/roomReservation';
+import DatePicker from '@/app/components/datePicker';
 
 interface PageProps {
   params: {
@@ -15,9 +16,9 @@ interface PageProps {
   }
 }
 const  Page =  async ({ params }: PageProps) => {
-  console.log(params.id);
+  const { id } =  await params;
   
-  const singleRoom = await getSingleRoom(params.id)
+  const singleRoom = await getSingleRoom(id)
 
   const roomImages = singleRoom?.room_image.split(",")
   const mainImage = roomImages[0]
@@ -26,7 +27,8 @@ const  Page =  async ({ params }: PageProps) => {
 
   const ammenities = singleRoom.amenities?.split(',')
   
-  console.log(singleRoom);
+
+  
   
   return (
     <>
@@ -76,9 +78,10 @@ const  Page =  async ({ params }: PageProps) => {
           </ul>
            
         </div>
-       
+        <RoomReservation {...singleRoom} maxGuests={singleRoom.max_guests}/>
         </div>
-         <RoomReservation maxGuests={singleRoom.max_guests}/>
+        
+         <DatePicker numNights={singleRoom.max_booking_night} />
       </section>
 
 

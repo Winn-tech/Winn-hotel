@@ -1,9 +1,10 @@
 'use server'
-
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 import { createClient } from '@/app/utils/supabase/server'
+import { createBooking } from './services'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -11,9 +12,7 @@ export async function login(formData: FormData) {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   }
-
   const { error } = await supabase.auth.signInWithPassword(data)
-
   if (error) {
     console.log('Login error:', error.message);
     // Instead of redirecting, throw error to be handled in the UI
@@ -42,13 +41,10 @@ export async function signup(formData: FormData) {
       },
     },
   }
-
   const { error } = await supabase.auth.signUp(data)
-
   if (error) {
     redirect('/error')
   }
-
   revalidatePath('/', 'layout')
   redirect('/login')
 }
@@ -63,31 +59,52 @@ export async function signup(formData: FormData) {
 
 export async function checkAuthStatus() {
   const supabase = await createClient(); 
-  const { data: { session }, error } = await supabase.auth.getSession();
-  
-
+  const { data: { user }, error } = await supabase.auth.getUser();
   if (error) {
     console.error('Error getting session:', error.message);
     return { isLoggedIn: false, user: null };
   }
-  
-  return { isLoggedIn: !!session, user: session?.user || null };
+  return { isLoggedIn: !!user, user: user || null };
 }
 
+export async function bookRoom(formData: FormData) {
+  try {
+    const supabase = await createClient()
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    if (userError || !user) {
+      throw new Error('You must be logged in to book a room.')
+    }
+    const room_id = formData.get('id') as string
+    const check_in_date = formData.get('check_in_date') as string
+    const check_out_date = formData.get('check_out_date') as string
+    const num_nights = parseInt(formData.get('num_nights') as string, 10)
+    const total_price = parseFloat(formData.get('total_price') as string)
 
-// signin with google
-// export async function signInWithGoogle() {
-//   const supabase = await createClient()
-//   const { data, error } =await supabase.auth.signInWithOAuth({
-//   provider: 'google',
-//   options: {
-//     redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
-//   },
-// })
-//   if (error) {
-//     console.error('Error signing in with Google:', error.message);
-//     throw new Error(error.message);
-//   }
+    console.log('Room booking attempt:', {
+      room_id,
+      user_id: user.id,
+      user_email: user.email,
+      check_in_date,
+      check_out_date,
+      num_nights,
+      total_price
+    })
 
-  
-// }
+    await createBooking({
+      room_id,
+      user_id: user.id,
+      user_email: user.email,
+      check_in_date,
+      check_out_date,
+      num_nights,
+      total_price
+    })
+
+    revalidatePath('/suites')
+    
+    
+  } catch (error) {
+    console.error('Error in bookRoom:', error)
+    throw error
+  }
+}

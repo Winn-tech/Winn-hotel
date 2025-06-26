@@ -1,5 +1,6 @@
 import { Users } from 'lucide-react';
 import { Room } from '../types';
+import Link from 'next/link';
 // interface suiteProps {
 //     description : st
 // }
@@ -26,9 +27,11 @@ const Suitecard = ({description, id, title, room_image, price, max_guests }: Roo
             <p className="text-sm text-primary-700 flex items-center gap-1">
               <Users className="w-4 h-4" /> Max guests: {max_guests}
             </p>
-            <button className="mt-4 bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded">
+            <Link href={`/suites/${id}`} className="block">
+              <button className="mt-4 bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded">
               Book Now
             </button>
+            </Link>
           </div>
   )
 }
