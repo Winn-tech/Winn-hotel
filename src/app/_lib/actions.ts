@@ -1,8 +1,6 @@
 'use server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import { createClient } from '@/app/utils/supabase/server'
 import { createBooking } from './services'
 
@@ -67,6 +65,7 @@ export async function checkAuthStatus() {
   return { isLoggedIn: !!user, user: user || null };
 }
 
+
 export async function bookRoom(formData: FormData) {
   try {
     const supabase = await createClient()
@@ -79,6 +78,7 @@ export async function bookRoom(formData: FormData) {
     const check_out_date = formData.get('check_out_date') as string
     const num_nights = parseInt(formData.get('num_nights') as string, 10)
     const total_price = parseFloat(formData.get('total_price') as string)
+    const num_guests = Number(formData.get('numGuests') || 1)
 
     console.log('Room booking attempt:', {
       room_id,
@@ -87,17 +87,19 @@ export async function bookRoom(formData: FormData) {
       check_in_date,
       check_out_date,
       num_nights,
-      total_price
+      total_price,
+      num_guests
     })
+    
 
     await createBooking({
       room_id,
-      user_id: user.id,
       user_email: user.email,
       check_in_date,
       check_out_date,
       num_nights,
-      total_price
+      total_price,
+      num_guests
     })
 
     revalidatePath('/suites')

@@ -19,7 +19,7 @@ const pages: NavProperties[] = [
   { label: 'Home', link: '/' },
   { label: 'about', link: '/about' },
   { label: 'suites', link: '/suites' },
-  { label: 'some', link: '/Some' },
+  { label: 'Bookings', link: '/bookings' },
 ]
 
 const Navbar = () => {

@@ -1,47 +1,106 @@
-import { error } from 'console';
-import {supabase} from '@/app/_lib/supabase';
-import { Room, Booking } from '../types';
+'use server';
 
-export const getRooms = async ():Promise<Room[]> =>{
-    const { data: rooms, error } = await supabase
+import { createServerActionClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { supabase } from '@/app/_lib/supabase';
+import { Room, Booking, BookingWithRoom } from '../types';
+
+export const getRooms = async (): Promise<Room[]> => {
+  const { data: rooms, error } = await supabase
     .from('rooms')
-    .select('*')
+    .select('*');
 
-    if (error) {
-        throw new Error(error.message);
-    }
-    return rooms as Room[]
-    }
-    
+  if (error) {
+    throw new Error(error.message);
+  }
 
-export const getSingleRoom = async (roomId: string): Promise<Room>=>{
-  
-    let { data, error } = await supabase
+  return rooms as Room[];
+};
+
+export const getSingleRoom = async (roomId: string): Promise<Room> => {
+  const { data, error } = await supabase
     .from('rooms')
     .select('*')
     .eq('id', roomId)
-    .single();           // Expect exactly one record
+    .single();
 
-    if (error || !data) {
-        throw new Error(`Error fetching room: ${error?.message}`);
-    }
+  if (error || !data) {
+    throw new Error(`Error fetching room: ${error?.message}`);
+  }
 
-    return data as Room;
-}
+  return data as Room;
+};
 
- export const createBooking = async (booking:Booking) =>{
+import { createClient } from '@/app/utils/supabase/server'
 
-const { data, error } = await supabase
-  .from('bookings')
-  .insert([
-    booking
-  ])
-  .select()
+export const createBooking = async (booking: Booking) => {
+  const supabase = await createClient() 
+
+  const {
+    data: { session },
+    error: sessionError,
+  } = await supabase.auth.getSession();
+
+  if (sessionError || !session?.user?.id) {
+    throw new Error('User not authenticated');
+  }
+
+  const userId = session.user.id;
+
+  const { data, error } = await supabase
+    .from('bookings')
+    .insert([{ ...booking, user_id: userId }])
+    .select();
+
+  if (error) {
+    throw new Error(`Error creating booking: ${error.message}`);
+  }
+
+  return data;
+};
 
 
-if (error) {
+export const getBookings = async (): Promise<BookingWithRoom[]> => {
+  const supabase = await createClient();
+
+  const {
+    data: { session },
+    error: sessionError,
+  } = await supabase.auth.getSession();
+
+  if (sessionError || !session?.user?.id) {
+    console.log('Session error or missing user:', sessionError);
+    return [];
+  }
+
+  const userId = session.user.id;
+
+  const { data: bookings, error } = await supabase
+    .from('bookings')
+    .select(`
+      id,
+      check_in_date,
+      check_out_date,
+      total_price,
+      num_nights,
+      num_guests,
+      room:room_id (
+        room_type,
+        title,
+        room_image
+      )
+    `)
+    .eq('user_id', userId);
+
+  if (error) {
     throw new Error(`Error fetching bookings: ${error.message}`);
-}
+  }
 
-}
+  // Map to ensure 'room' is always a single object (not array or undefined)
+  const bookingsWithRoomObject = bookings?.map((booking: any) => ({
+    ...booking,
+    room: booking.room && !Array.isArray(booking.room) ? booking.room : booking.room?.[0] ?? null,
+  }));
 
+  return bookingsWithRoomObject ?? [];
+};
