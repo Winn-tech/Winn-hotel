@@ -30,9 +30,9 @@ export type BookingWithRoom = {
   num_nights?: number;
   num_guests?: number;
   status: string;
-  rooms?: {
+  room?: {
     room_type?: string;
-    title?: string;
+    title: string;
     room_image: string;
   } | null;
 };

@@ -2,7 +2,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/app/utils/supabase/server'
-import { createBooking } from './services'
+import { createBooking, getBookings } from './services'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -103,6 +103,7 @@ export async function bookRoom(formData: FormData) {
     })
 
     revalidatePath('/suites')
+    redirect('/bookings')
     
     
   } catch (error) {
@@ -110,3 +111,37 @@ export async function bookRoom(formData: FormData) {
     throw error
   }
 }
+
+
+export const deleteBookingAction = async (booking_id: string) => {
+    const supabase = await createClient();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+        console.error('deleteBookingAction: Authentication error:', userError?.message);
+        throw new Error('You must be logged in to delete a booking.');
+    }
+
+    // Fetch user's bookings to ensure authorization
+    const userBookings = await getBookings(); // This already filters by user_id
+    const isBookingBelongsToUser = userBookings.some(booking => booking.id === booking_id);
+
+    if (!isBookingBelongsToUser) {
+        console.warn(`deleteBookingAction: Unauthorized attempt to delete booking_id: ${booking_id} by user: ${user.id}`);
+        throw new Error('You can only delete your own bookings');
+    }
+
+    console.log(`Attempting to delete booking ${booking_id} for user ${user.id}`);
+    const { error } = await supabase
+        .from('bookings')
+        .delete()
+        .eq('id', booking_id);
+
+    if (error) {
+        console.error(`Supabase delete error for booking ${booking_id}:`, error.message);
+        throw new Error(`Failed to delete booking from database: ${error.message}`);
+    }
+
+    console.log(`Successfully deleted booking ${booking_id}. Revalidating path.`);
+    revalidatePath('/bookings');
+};
