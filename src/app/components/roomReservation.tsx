@@ -25,7 +25,7 @@ const RoomReservation : React.FC<RoomReservationProps > = ({ id, title, price , 
     <article className='shadow-3xl sm:max-w-[30vw] sm:min-w-[30vw] p-3'>
         <div className='flex justify-between w-full border-1 border-primary-400 items-center p-2 mb-4' >
             <p className='text-[12px] text-primary-800 font-bold'>Reserve: {title}</p>
-            <p className='text-accent-700 font-bold text-[12px]'>from : <span>{price} / night</span> </p>
+            <p className='text-accent-700 sm:font-bold text-[12px]'>from : <span>{price} / night</span> </p>
         </div>
         <form action={bookRoom} className='flex flex-col gap-4'>
           <input type="hidden" name="id" value={id} />
@@ -57,7 +57,12 @@ const RoomReservation : React.FC<RoomReservationProps > = ({ id, title, price , 
             />
          </div>
 
-          <SubmitButton/>
+          {
+            (check_in_date && check_out_date) ? <SubmitButton/> : 
+            <p className='text-accent-500 font-bold'>Select date(s) of stay.</p>
+              
+          }
+          
         </form>
     </article>
   )
@@ -70,5 +75,6 @@ const SubmitButton =()=>{
     return (
     <button className='w-full cursor-pointer bg-gradient-to-r from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-white py-2 px-8 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 flex items-center justify-center'>
       {pending ? 'Processing...' : 'Book Now'}
-    </button>)
+    </button>
+    )
 }

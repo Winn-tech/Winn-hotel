@@ -35,10 +35,10 @@ const  Page =  async ({ params }: PageProps) => {
       <div className='flex justify-start'>
         <p></p>
       </div>
-      <div className="grid grid-cols-3 gap-4 py-4 rounded-xl overflow-hidden ">
-        <img src={mainImage} alt="Room 1" className="col-span-2 row-span-2 rounded-xl object-cover w-full h-[70vh]" />
-        <img src={imageOne} alt="Room 2" className="rounded-xl w-full h-[33vh] object-cover" />
-        <img src={imageTwo} alt="Bathroom" className="rounded-xl w-full h-[33vh] object-cover" />
+      <div className="sm:grid grid-cols-3 gap-4 py-4 rounded-xl block overflow-hidden ">
+        <img src={mainImage} alt="Room 1" className="col-span-2 row-span-2 rounded-xl object-cover w-full h-[45vh] sm:h-[70vh]" />
+        <img src={imageOne} alt="Room 2" className="rounded-xl w-full h-[33vh] object-cover hidden sm:block" />
+        <img src={imageTwo} alt="Bathroom" className="rounded-xl w-full h-[33vh] object-cover hidden sm:block" />
       </div>
 
       <section className='w-full flex flex-col gap-4 sm:flex-row my-4'>

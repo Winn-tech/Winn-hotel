@@ -5,16 +5,13 @@ import Image from 'next/image'
 import {logout} from '@/app/_lib/actions'
 import {toast} from 'react-toastify'
 import { usePathname } from 'next/navigation'
-import { LogOut } from 'lucide-react';
+import { LogOut, Menu } from 'lucide-react';
 import { useMainContext } from './context'
 
 interface NavProperties {
   label : string
   link : string
 }
-
-
-
 const pages: NavProperties[] = [
   { label: 'Home', link: '/' },
   { label: 'about', link: '/about' },
@@ -25,6 +22,8 @@ const pages: NavProperties[] = [
 const Navbar = () => {
 
   const {isLoggedIn, setIsLoggedIn} = useMainContext();
+  const {setCollapsed} = useMainContext()
+
  
 
   const handlelogout = async () => {
@@ -35,6 +34,9 @@ const Navbar = () => {
     } catch (error) {
       console.error('Logout failed:', error);
     }
+  }
+  const openSideBar = () =>{
+    setCollapsed(false)
   }
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10 px-10">
@@ -68,6 +70,13 @@ const Navbar = () => {
                 Login
               </Link>
             )}
+            <button
+              onClick={openSideBar}
+              className="p-2 rounded focus:outline-none none  sm:hidden"
+              aria-label="Toggle sidebar"
+            >
+               <Menu size={24} className='text-primary-800' onClick={openSideBar}/>
+            </button>
            
           </div>
         </div>

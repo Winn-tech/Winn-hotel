@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
-import { createContext, ReactNode, useEffect } from 'react'
+import { createContext, ReactNode, useEffect, Dispatch, SetStateAction } from 'react'
 import {checkAuthStatus} from '@/app/_lib/actions'
 import {DateRange} from 'react-day-picker';
 
@@ -10,6 +10,9 @@ interface MainContextType {
   setIsLoggedIn: (value: boolean) => void,
   selected?: DateRange | undefined
   setSelected?: (value: DateRange | undefined) => void
+  collapsed : boolean
+  setCollapsed : Dispatch<SetStateAction<boolean>> ,
+  toggleSidebar : () => void 
 }
 
 const MainContext = createContext<MainContextType | undefined>(undefined)
@@ -22,18 +25,25 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
         setIsLogged(isLoggedIn);
       }
       checkAuth();
-    }, [isLogged])
+    }, [])
 
 
   const [selected, setSelected] = useState<DateRange | undefined>({ from: undefined, to: undefined });
+  const [collapsed, setCollapsed] = useState(true);
 
 
+  const toggleSidebar = () => {
+    setCollapsed(prev => !prev); 
+  };
 
   const value: MainContextType = {
     isLoggedIn: isLogged,
     setIsLoggedIn: setIsLogged,
     selected: selected,
-    setSelected: setSelected
+    setSelected: setSelected,
+    collapsed,
+    setCollapsed: setCollapsed,
+   toggleSidebar
   }
 
   return (
@@ -43,7 +53,7 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-// Optional: Custom hook for easier usage
+
 export const useMainContext = () => {
   const context = React.useContext(MainContext)
   if (context === undefined) {
