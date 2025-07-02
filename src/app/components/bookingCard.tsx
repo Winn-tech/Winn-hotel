@@ -90,24 +90,19 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
           </div>
 
           <div className="flex justify-between items-center">
-            {/* <p className="text-lg font-bold">${booking.total_price.toFixed(2)}</p> */}
-            {/* <p className={`text-sm font-semibold ${getPaymentStatusColor(booking.paymentStatus)}`}>{booking.paymentStatus}</p> */}
+            <p className="text-lg font-bold text-primary-800">${booking.total_price}</p> 
+             {/* <p className={`text-sm font-semibold ${getPaymentStatusColor(booking.paymentStatus)}`}>{booking.paymentStatus}</p> */}
           </div>
 
           <div className="flex gap-2">
-            <button className="flex-1 bg-gray-100 text-sm px-3 py-2 rounded hover:bg-gray-200 flex items-center gap-1">
-              <Edit3 className="w-4 h-4" />Edit
-            </button>
             <button 
                onClick={() =>handleDelete(booking.id)}
-               className="flex-1 bg-red-50 text-sm px-3 py-2 rounded text-red-600 hover:bg-red-100 flex items-center gap-1">
+               className="flex-1 bg-red-50 text-sm border-2 border-accent-400 px-3 rounded text-red-600 py-2 hover:bg-red-100 flex  items-center justify-center w-[50%]items-center gap-1">
               <Trash2 className="w-4 h-4" />Delete
             </button>
-            {/* {booking.status === 'pending' && ( */}
-              <button onClick={() => handlePayment(booking.id)} className="flex-1 bg-blue-500 text-white text-sm px-3 py-2 rounded hover:bg-blue-600 flex items-center gap-1">
+              <button onClick={() => handlePayment(booking.id)} className="flex-1cursor-pointer w-[50%] py-2 bg-gradient-to-r flex justify-center items-center from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-white px-8 rounded font-semibold">
                 <CreditCard className="w-4 h-4" />Pay
               </button>
-            {/* )} */}
           </div>
         </div>
       </article>

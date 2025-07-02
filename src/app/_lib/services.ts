@@ -106,16 +106,16 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
   return bookingsWithRoomObject ?? [];
 };
 
-export const deleteBooking = async (bookingId: string) => {
-  const { error } = await supabase
-    .from('bookings')
-    .delete()
-    .eq('id', bookingId);
+// export const deleteBooking = async (bookingId: string) => {
+//   const { error } = await supabase
+//     .from('bookings')
+//     .delete()
+//     .eq('id', bookingId);
 
-  if (error) {
-    throw new Error(`Error deleting booking: ${error.message}`);
-  }
-  console.log('deleting book',bookingId);
+//   if (error) {
+//     throw new Error(`Error deleting booking: ${error.message}`);
+//   }
+//   console.log('deleting book',bookingId);
   
-  //  revalidatePath('/bookings');
-}
+//   //  revalidatePath('/bookings');
+// }

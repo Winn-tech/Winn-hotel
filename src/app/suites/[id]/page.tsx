@@ -43,7 +43,7 @@ const  Page =  async ({ params }: PageProps) => {
 
       <section className='w-full flex flex-col gap-4 sm:flex-row my-4'>
         <div className=' sm:max-w-[60vw] '>
-        <h3 className='text-3xl font-bold text-primary-800 mb-3'>{singleRoom.title.toUpperCase()}</h3>
+        <h3 className='text-2xl sm:3xl font-bold text-primary-800 mb-3'>{singleRoom.title.toUpperCase()}</h3>
         <div className='flex  flex-wrap mb-3 font-[500] gap-4 text-accent-300 text-2xl'>
           <p className='flex items-center gap-2'>
              <span>Free wifi</span>

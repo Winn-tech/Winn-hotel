@@ -122,8 +122,7 @@ export const deleteBookingAction = async (booking_id: string) => {
         throw new Error('You must be logged in to delete a booking.');
     }
 
-    // Fetch user's bookings to ensure authorization
-    const userBookings = await getBookings(); // This already filters by user_id
+    const userBookings = await getBookings(); 
     const isBookingBelongsToUser = userBookings.some(booking => booking.id === booking_id);
 
     if (!isBookingBelongsToUser) {

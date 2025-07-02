@@ -2,16 +2,14 @@ import React, { Suspense } from 'react'
 import SuitesLists from '../components/suitesLists'
 import Loading from './loading'
 import SuitesFilter from '../components/suitesFilter'
-import { getRooms } from '../_lib/services';
+import Suitesparams from '../components/suitesparams'
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
 const Page = ({searchParams}:PageProps) => {
-  const filter = searchParams?.room_class ?? 'all';
-  console.log('Filter:', filter);
-  
+  const filter = searchParams?.room_class ?? 'all'; 
   return (
     <div>
         <h1 className='sm:text-4xl text-2xl my-5 text-primary-950 font-medium'>
@@ -23,6 +21,7 @@ const Page = ({searchParams}:PageProps) => {
         natural beauty of the region. Each suite offers a private sanctuary where luxury meets nature—complete
         with a personal hot tub for soaking under the stars, offering the perfect escape from the everyday.
        </p>
+       <Suitesparams/>
        <SuitesFilter/>
        <Suspense fallback={<Loading/>}>
           <SuitesLists filter={filter} />

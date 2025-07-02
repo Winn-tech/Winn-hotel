@@ -20,11 +20,17 @@ const pages: NavProperties[] = [
 ]
 
 const Navbar = () => {
-
+  const pathname = usePathname();
   const {isLoggedIn, setIsLoggedIn} = useMainContext();
   const {setCollapsed} = useMainContext()
 
  
+  const isActiveLink = (link: string) => {
+    if (link === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(link);
+  };
 
   const handlelogout = async () => {
     try {
@@ -35,9 +41,11 @@ const Navbar = () => {
       console.error('Logout failed:', error);
     }
   }
+  
   const openSideBar = () =>{
     setCollapsed(false)
   }
+  
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10 px-10">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-5">
@@ -53,8 +61,12 @@ const Navbar = () => {
             {
                pages.map((page)=>{
                 return (
-                  <Link href={page.link} key={page.label} className={`text-primary-700 ${usePathname() === page.link ? 'border-b-accent-500 border-b-2' : ''} hover:border-b-2 hover:border-accent-500 capitalize`}>
-                     { page.label}
+                  <Link 
+                    href={page.link} 
+                    key={page.label} 
+                    className={`text-primary-700 ${isActiveLink(page.link) ? 'border-b-accent-500 border-b-2' : ''} hover:border-b-2 hover:border-accent-500 capitalize`}
+                  >
+                     {page.label}
                   </Link>
                 )
                })
