@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react"; 
-import { Home, Calendar, List, Menu } from "lucide-react";
+import { Home, Calendar, List, X, Building } from "lucide-react";
 import Link from "next/link";
 import { useMainContext } from '@/app/components/context'; 
 
@@ -14,8 +14,8 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-full bg-gray-800 text-white flex flex-col transition-transform duration-300 z-40
-          ${collapsed ? '-translate-x-full w-0' : 'translate-x-0 w-64'}`}
+        className={`fixed top-0 left-0 h-full bg-gradient-to-r from-primary-600 to-accent-500 text-white flex flex-col transition-transform duration-300 z-40
+          ${collapsed ? '-translate-x-full w-0' : 'translate-x-0 w-75'}`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <h1 className="text-lg font-bold whitespace-nowrap overflow-hidden">WinnHotels</h1> 
@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
             className="p-2 rounded hover:bg-gray-700 focus:outline-none"
             aria-label="Close sidebar"
           >
-            <Menu size={24} />
+            <X size={24} />
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto">
@@ -37,6 +37,16 @@ const Sidebar: React.FC = () => {
               >
                 <Home size={20} />
                 <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="flex items-center gap-3 px-4 py-2 hover:bg-gray-700 rounded"
+                onClick={closesidebar}
+              >
+                <Building size={20} />
+                <span>About</span>
               </Link>
             </li>
             <li>
