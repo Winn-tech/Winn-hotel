@@ -29,7 +29,7 @@ const Suitecard = ({description, id, title, room_image, price, max_guests }: Roo
             </p>
             <Link href={`/suites/${id}`} className="block">
               <button className="mt-4 bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded">
-              Book Now
+             Details & reservation &rarr;
             </button>
             </Link>
           </div>

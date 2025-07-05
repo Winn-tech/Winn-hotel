@@ -46,23 +46,23 @@ const  Page =  async ({ params }: PageProps) => {
         <h3 className='text-2xl sm:3xl font-bold text-primary-800 mb-3'>{singleRoom.title.toUpperCase()}</h3>
         <div className='flex  flex-wrap mb-3 font-[500] gap-4 text-accent-300 text-2xl'>
           <p className='flex items-center gap-2'>
-             <span>Free wifi</span>
             <span><RiWifiLine/></span>
+             <span>Free wifi</span>
           </p>
 
           <p className='flex items-center gap-3'>
-            <span>Air conditioning</span>
             <span><TbAirConditioning/></span>
+            <span>Air conditioning</span>
           </p>
 
           <p className='flex items-center gap-3'>
-            <span>Private Bathroom</span>
             <span><FaShower/></span>
+            <span>Private Bathroom</span>
           </p>
 
           <p className='flex items-center gap-3'>
-            <span>One king size bed</span>
             <span><LuBedDouble/></span>
+            <span>One king size bed</span>
           </p>
         </div>
         <div className='text-[20px]'>

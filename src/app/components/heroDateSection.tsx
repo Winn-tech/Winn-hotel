@@ -18,6 +18,7 @@ const HeroDateSection = () => {
                 fromDate={new Date()}
                 disabled={{ before: new Date() }}
                 max={maxBookingLength}
+                required={true}
                 classNames={{
                 range_end: `${defaultClassNames.range_end} bg-green-500 text-white rounded-r-lg`,
                 day_today: 'border-primary-500 border text-primary-500', // Change the color of today's date

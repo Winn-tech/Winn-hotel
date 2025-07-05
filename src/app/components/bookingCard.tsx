@@ -7,6 +7,7 @@ import { BookingWithRoom } from '../types';
 import useImageShuffle from '@/app/components/imageShuffle';
 import { deleteBookingAction } from '../_lib/actions';
 import { useTransition } from 'react';
+import CheckoutButton from './paymentButton';
 
 interface BookingCardProps {
   booking: BookingWithRoom;
@@ -97,12 +98,13 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
           <div className="flex gap-2">
             <button 
                onClick={() =>handleDelete(booking.id)}
-               className="flex-1 bg-red-50 text-sm border-2 border-accent-400 px-3 rounded text-red-600 py-2 hover:bg-red-100 flex  items-center justify-center w-[50%]items-center gap-1">
+               className="flex-1 bg-red-50 text-sm border-2 border-accent-400 px-3 cursor-pointer rounded text-red-600 py-2 hover:bg-red-100 flex  items-center justify-center gap-1">
               <Trash2 className="w-4 h-4" />Delete
             </button>
-              <button onClick={() => handlePayment(booking.id)} className="flex-1cursor-pointer w-[50%] py-2 bg-gradient-to-r flex justify-center items-center from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-white px-8 rounded font-semibold">
+              {/* <button onClick={() => handlePayment(booking.id)} className="flex-1cursor-pointer w-[50%] py-2 bg-gradient-to-r flex justify-center items-center from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-white px-8 rounded font-semibold">
                 <CreditCard className="w-4 h-4" />Pay
-              </button>
+              </button> */}
+              <CheckoutButton price ={booking.total_price!} />
           </div>
         </div>
       </article>

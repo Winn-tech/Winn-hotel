@@ -9,10 +9,12 @@ interface MainContextType {
   isLoggedIn: boolean
   setIsLoggedIn: (value: boolean) => void,
   selected?: DateRange | undefined
-  setSelected?: (value: DateRange | undefined) => void
+  setSelected?: (value: DateRange) => void
   collapsed : boolean
   setCollapsed : Dispatch<SetStateAction<boolean>> ,
   toggleSidebar : () => void 
+  guests : number | undefined,
+  setGuests : Dispatch<SetStateAction<number | undefined>>
 }
 
 const MainContext = createContext<MainContextType | undefined>(undefined)
@@ -30,6 +32,8 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
 
   const [selected, setSelected] = useState<DateRange | undefined>({ from: undefined, to: undefined });
   const [collapsed, setCollapsed] = useState(true);
+  const [guests, setGuests] = useState<number | undefined >();
+
 
 
   const toggleSidebar = () => {
@@ -43,7 +47,9 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
     setSelected: setSelected,
     collapsed,
     setCollapsed: setCollapsed,
-   toggleSidebar
+    toggleSidebar,
+    guests,
+    setGuests
   }
 
   return (

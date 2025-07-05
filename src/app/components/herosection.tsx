@@ -6,16 +6,16 @@ import HeroDateSection from './heroDateSection';
 import { redirect } from 'next/navigation';
 
 const HotelHeroSection = () => {
-  const { selected, setSelected } = useMainContext();
-  const [searchData, setSearchData] = useState({
-    destination: '',
-    checkIn: '',
-    checkOut: '',
-    guests: 2
-  });
+  const { selected, guests, setGuests  } = useMainContext();
+  // const [searchData, setSearchData] = useState({
+  //   destination: '',
+  //   checkIn: '',
+  //   checkOut: '',
+  //   guests: 2
+  // });
   const [isLoading, setIsLoading] = useState(false);
   const [showDate, setDate] = useState(false);
-
+  
   // Helper function to format date for display
   const formatDateForDisplay = (date: Date | string | null | undefined):string => {
     if (!date) return 'Select Date';
@@ -63,7 +63,6 @@ const HotelHeroSection = () => {
                     placeholder="Where to?"
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 focus:scale-105"
                     value="Lagos, Nigeria"
-                    onChange={(e) => setSearchData({...searchData, destination: e.target.value})}
                     readOnly
                   />
                 </div>
@@ -75,7 +74,6 @@ const HotelHeroSection = () => {
                     placeholder="Check In Date"
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 focus:scale-105"
                     value={formatDateForDisplay(selected?.from)}
-                    onChange={(e) => setSearchData({...searchData, checkIn: e.target.value})}
                     onClick={() => setDate(!showDate)}
                     readOnly
                   />
@@ -88,7 +86,7 @@ const HotelHeroSection = () => {
                     placeholder="Check Out Date"
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 focus:scale-105"
                     value={formatDateForDisplay(selected?.to)}
-                    onChange={(e) => setSearchData({...searchData, checkOut: e.target.value})}
+                    // onChange={(e) => setSearchData({...searchData, checkOut: e.target.value})}
                     onClick={() => setDate(!showDate)}
                     readOnly
                   />
@@ -98,8 +96,8 @@ const HotelHeroSection = () => {
                   <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 text-accent-400 w-5 h-5 transition-all duration-300 group-hover:text-primary-300 group-hover:scale-110" />
                   <select
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 appearance-none focus:scale-105"
-                    value={searchData.guests}
-                    onChange={(e) => setSearchData({...searchData, guests: parseInt(e.target.value)})}
+                    value={guests}
+                    onChange={(e) => setGuests(parseInt(e.target.value))}
                   >
                     <option value={1} className="bg-accent-200">1 Guest</option>
                     <option value={2} className="bg-accent-200">2 Guests</option>
