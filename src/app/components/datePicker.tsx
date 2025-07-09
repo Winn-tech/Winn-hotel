@@ -1,5 +1,5 @@
 'use client';
-import { DayPicker, DateRange, getDefaultClassNames } from 'react-day-picker';
+import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { useMainContext } from './context';
 

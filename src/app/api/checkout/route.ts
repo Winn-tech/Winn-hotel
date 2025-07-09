@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { price, status, id } = body;
+  const { price, id } = body;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -23,7 +23,6 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      
       metadata: {
         booking_id: id,
       },
@@ -32,7 +31,13 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ id: session.id });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : typeof error === 'string'
+        ? error
+        : 'An unknown error occurred';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

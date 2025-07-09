@@ -40,9 +40,15 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ received: true });
-  } catch (err: any) {
-    console.error('Webhook error:', err.message);
-    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+  } catch (err: unknown) {
+    const message =
+      err instanceof Error
+        ? err.message
+        : typeof err === 'string'
+        ? err
+        : 'Webhook Error: An unknown error occurred';
+    console.error('Webhook error:', message);
+    return new NextResponse(`Webhook Error: ${message}`, { status: 400 });
   }
 }
 
@@ -57,13 +63,13 @@ export async function GET(req: Request) {
 
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
-    
+
     if (session.payment_status === 'paid') {
       const bookingId = session.metadata?.booking_id;
-      
+
       if (bookingId) {
         const supabase = await createClient();
-        
+
         const { data, error } = await supabase
           .from('bookings')
           .update({ status: 'paid' })
@@ -80,7 +86,13 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({ error: 'Payment not completed' }, { status: 400 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : typeof error === 'string'
+        ? error
+        : 'An unknown error occurred';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

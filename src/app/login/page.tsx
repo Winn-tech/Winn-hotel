@@ -11,8 +11,12 @@ const Page = () => {
   async function handleLogin(formData: FormData) {
     try {
       await login(formData)
-    } catch (err: any) {
-      setError(err.message || 'Login failed')
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('Login failed')
+      }
     }
   }
 
@@ -31,9 +35,13 @@ const Page = () => {
       console.error('Error signing in with Google:', error.message)
       setError(error.message)
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Google login error:', err)
-    setError(err.message || 'Google login failed')
+    if (err instanceof Error) {
+      setError(err.message)
+    } else {
+      setError('Google login failed')
+    }
   }
 }
 
