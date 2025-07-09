@@ -13,8 +13,9 @@ const Page = () => {
     const formData = new FormData(event.currentTarget)
     try {
       await signup(formData)
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong')
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong'
+      setError(errorMessage)
     }
   }
 

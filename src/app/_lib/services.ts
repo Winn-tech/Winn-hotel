@@ -81,6 +81,7 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
       check_out_date,
       total_price,
       num_nights,
+      status,
       num_guests,
       room:room_id (
         room_type,
@@ -95,7 +96,7 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
   }
 
   
-  const bookingsWithRoomObject = bookings?.map((booking: any) => ({
+  const bookingsWithRoomObject = bookings?.map((booking) => ({
     ...booking,
     room: booking.room && !Array.isArray(booking.room) ? booking.room : booking.room?.[0] ?? null,
   }));
