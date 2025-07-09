@@ -7,14 +7,12 @@ interface DatePickerProps {
   numNights: number;
 }
 
-
-function DatePicker({numNights}: DatePickerProps) {
-  
+function DatePicker({ numNights }: DatePickerProps) {
   const { selected, setSelected } = useMainContext();
-  const maxBookingLength = numNights; 
-  console.log(maxBookingLength, 'maxBookingLength');
-  
-const defaultClassNames = getDefaultClassNames();
+  const maxBookingLength = numNights;
+
+  const defaultClassNames = getDefaultClassNames();
+
   return (
     <div>
       <DayPicker
@@ -22,19 +20,18 @@ const defaultClassNames = getDefaultClassNames();
         selected={selected}
         onSelect={setSelected}
         numberOfMonths={2}
-        fromMonth={ new Date() }
+        fromMonth={new Date()}
         fromDate={new Date()}
         disabled={{ before: new Date() }}
         max={maxBookingLength}
+        required={true} 
         classNames={{
-        range_end: `${defaultClassNames.range_end} bg-green-500 text-white rounded-r-lg`,
-        day_today: 'border-primary-500 border text-primary-500', // Change the color of today's date
-        selected: `bg-accent-500 border-accent-500 text-accent-700`, // Highlight the selected day
-        root: `${defaultClassNames.root} shadow-lg p-5`, // Add a shadow to the root element
-        chevron: `${defaultClassNames.chevron} fill-primary-500` // Change the color of the chevron
-        
-      }}
-
+          range_end: `${defaultClassNames.range_end} bg-green-500 text-white rounded-r-lg`,
+          day_today: 'border-primary-500 border text-primary-500',
+          selected: `bg-accent-500 border-accent-500 text-accent-700`,
+          root: `${defaultClassNames.root} shadow-lg p-5`,
+          chevron: `${defaultClassNames.chevron} fill-primary-500`,
+        }}
       />
       <p>
         {selected?.from && selected?.to

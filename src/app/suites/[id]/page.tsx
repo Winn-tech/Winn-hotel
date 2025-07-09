@@ -3,10 +3,6 @@ import { RiWifiLine } from "react-icons/ri";
 import { TbAirConditioning } from "react-icons/tb";
 import { FaShower } from "react-icons/fa";
 import { LuBedDouble } from "react-icons/lu";
-import { TbUsers } from "react-icons/tb";
-
-
-import Image from 'next/image'
 import RoomReservation from '@/app/components/roomReservation';
 import DatePicker from '@/app/components/datePicker';
 

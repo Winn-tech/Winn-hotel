@@ -11,7 +11,7 @@ export default function SuccessPage() {
         <CheckCircle className="text-green-600 w-16 h-16 mx-auto mb-4" />
         <h1 className="text-2xl font-semibold text-green-700 mb-2">Payment Successful!</h1>
         <p className="text-gray-600 mb-6">
-          Thank you for your purchase. We've received your Booking successfully.
+          Thank you for your purchase. We&apos;ve received your Booking successfully.
         </p>
       <div className='flex gap-1 flex-col sm:flex-row'>
           <Link

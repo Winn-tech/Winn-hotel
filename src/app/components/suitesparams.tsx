@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useMainContext } from '../components/context'
-import { Search, MapPin, Calendar, Users, ChevronDown } from 'lucide-react';
+import { Calendar, Users } from 'lucide-react';
 
 const Suitesparams = () => {
     const { selected } = useMainContext();

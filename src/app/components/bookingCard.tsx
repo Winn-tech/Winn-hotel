@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Calendar, MapPin, Users, Clock, Edit3, Trash2, CreditCard, CheckCircle, AlertCircle, ArrowLeft, Home } from 'lucide-react';
+import {  Trash2} from 'lucide-react';
 import { BookingWithRoom } from '../types';
 import useImageShuffle from '@/app/components/imageShuffle';
 import { deleteBookingAction } from '../_lib/actions';
@@ -16,37 +16,27 @@ interface BookingCardProps {
 const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
   const image = useImageShuffle(booking.room?.room_image || '', 3000);
  
-  const handleEdit = (booking: BookingWithRoom): void => {
-    
-  };
-
   
 
-  const handlePayment = async (bookingId: string): Promise<void> => {
-    
-  };
-
-  const handleSaveEdit = async (): Promise<void> => {
-
-  };
-
-  const getStatusColor = (status: string): string => {
-     switch (status) {
-       case 'confirmed': return 'bg-green-100 text-green-800 border-green-200';
-       case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-       case 'cancelled': return 'bg-red-100 text-red-800 border-red-200';
-       default: return 'bg-gray-100 text-gray-800 border-gray-200';
-     }
-   };
  
-   const getPaymentStatusColor = (status: string): string => {
-     switch (status) {
-       case 'paid': return 'text-green-600';
-       case 'pending': return 'text-yellow-600';
-       case 'failed': return 'text-red-600';
-       default: return 'text-gray-600';
-     }
-   };  
+
+  // const getStatusColor = (status: string): string => {
+  //    switch (status) {
+  //      case 'confirmed': return 'bg-green-100 text-green-800 border-green-200';
+  //      case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+  //      case 'cancelled': return 'bg-red-100 text-red-800 border-red-200';
+  //      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+  //    }
+  //  };
+ 
+  //  const getPaymentStatusColor = (status: string): string => {
+  //    switch (status) {
+  //      case 'paid': return 'text-green-600';
+  //      case 'pending': return 'text-yellow-600';
+  //      case 'failed': return 'text-red-600';
+  //      default: return 'text-gray-600';
+  //    }
+  //  };  
    
    const [isPending, startTransition] = useTransition();
    const handleDelete = async (bookingId: string): Promise<void> => {
@@ -104,7 +94,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
               {/* <button onClick={() => handlePayment(booking.id)} className="flex-1cursor-pointer w-[50%] py-2 bg-gradient-to-r flex justify-center items-center from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-white px-8 rounded font-semibold">
                 <CreditCard className="w-4 h-4" />Pay
               </button> */}
-              <CheckoutButton price ={booking.total_price!} />
+              <CheckoutButton price ={booking.total_price!}  status ={booking.status} id={booking.id}/>
           </div>
         </div>
       </article>

@@ -1,10 +1,7 @@
 'use server';
-
-import { createServerActionClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 import { supabase } from '@/app/_lib/supabase';
 import { Room, Booking, BookingWithRoom } from '../types';
-import { revalidatePath } from 'next/cache';
+
 
 export const getRooms = async (): Promise<Room[]> => {
   const { data: rooms, error } = await supabase
@@ -97,7 +94,7 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
     throw new Error(`Error fetching bookings: ${error.message}`);
   }
 
-  // Map to ensure 'room' is always a single object (not array or undefined)
+  
   const bookingsWithRoomObject = bookings?.map((booking: any) => ({
     ...booking,
     room: booking.room && !Array.isArray(booking.room) ? booking.room : booking.room?.[0] ?? null,
@@ -106,16 +103,3 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
   return bookingsWithRoomObject ?? [];
 };
 
-// export const deleteBooking = async (bookingId: string) => {
-//   const { error } = await supabase
-//     .from('bookings')
-//     .delete()
-//     .eq('id', bookingId);
-
-//   if (error) {
-//     throw new Error(`Error deleting booking: ${error.message}`);
-//   }
-//   console.log('deleting book',bookingId);
-  
-//   //  revalidatePath('/bookings');
-// }

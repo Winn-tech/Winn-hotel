@@ -2,7 +2,7 @@
 import { toast } from 'react-toastify';
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { login, signup } from '@/app/_lib/actions'
+import { login } from '@/app/_lib/actions'
 import { FcGoogle } from "react-icons/fc";
 import { createClient } from '@/app/utils/supabase/client'
 const Page = () => {
@@ -19,7 +19,7 @@ const Page = () => {
  const handleGoogleLogin = async () => {
   try {
     const supabase = createClient()
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,

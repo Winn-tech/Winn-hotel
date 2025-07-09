@@ -1,6 +1,7 @@
 import { Users } from 'lucide-react';
 import { Room } from '../types';
 import Link from 'next/link';
+import Image from 'next/image';
 // interface suiteProps {
 //     description : st
 // }
@@ -12,11 +13,13 @@ const Suitecard = ({description, id, title, room_image, price, max_guests }: Roo
             className="relative border border-primary-100 rounded-lg p-4 shadow-sm hover:shadow-md transition"
             
           >
-            <div className="relative">
-              <img
+            <div className="relative w-full h-48">
+              <Image
                 src={image}
                 alt={title}
-                className="w-full h-48 object-cover rounded-md mb-4"
+                className=" object-cover rounded-md mb-4 "
+                fill
+                
               />
               <span className="absolute top-2 right-2 bg-accent-600 text-white text-sm px-3 py-1 rounded-md shadow">
                 ${price}/night

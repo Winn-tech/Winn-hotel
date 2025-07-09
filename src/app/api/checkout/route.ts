@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { price } = body;
+  const { price, status, id } = body;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -18,11 +18,15 @@ export async function POST(req: Request) {
             product_data: {
               name: 'Custom Product',
             },
-            unit_amount: price,
+            unit_amount: price * 100,
           },
           quantity: 1,
         },
       ],
+      
+      metadata: {
+        booking_id: id,
+      },
       success_url: `${req.headers.get('origin')}/success`,
       cancel_url: `${req.headers.get('origin')}/cancel`,
     });

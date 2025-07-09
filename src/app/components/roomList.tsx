@@ -1,7 +1,6 @@
 import React from 'react'
 import {getRooms} from '@/app/_lib/services'
 import RoomListCard from '@/app/components/roomListCard'
-import { log } from 'console'
 
 const RoomList = async ()  => {
     const rooms = await getRooms()

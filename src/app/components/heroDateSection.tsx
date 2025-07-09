@@ -21,10 +21,10 @@ const HeroDateSection = () => {
                 required={true}
                 classNames={{
                 range_end: `${defaultClassNames.range_end} bg-green-500 text-white rounded-r-lg`,
-                day_today: 'border-primary-500 border text-primary-500', // Change the color of today's date
-                selected: `bg-accent-500 border-accent-500 text-accent-700`, // Highlight the selected day
-                root: `${defaultClassNames.root} shadow-lg p-5`, // Add a shadow to the root element
-                chevron: `${defaultClassNames.chevron} fill-primary-500` // Change the color of the chevron
+                day_today: 'border-primary-500 border text-primary-500', 
+                selected: `bg-accent-500 border-accent-500 text-accent-700`, 
+                root: `${defaultClassNames.root} shadow-lg p-5`, 
+                chevron: `${defaultClassNames.chevron} fill-primary-500` 
                 
               }}
         
