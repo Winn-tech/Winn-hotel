@@ -56,7 +56,7 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden sm:flex space-x-8">
             {
                pages.map((page)=>{
                 return (

@@ -1,5 +1,8 @@
 import Image from 'next/image';
-
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: "About",
+}
 export default function AboutPage() {
     const mainImage = 'https://ftdxflkcjyiawkvbdgmx.supabase.co/storage/v1/object/public/rooms//visualsofdana-T5pL6ciEn-I-unsplash.jpg'
     const imageOne = 'https://ftdxflkcjyiawkvbdgmx.supabase.co/storage/v1/object/public/rooms//workdesk.jpg'

@@ -3,6 +3,10 @@ import SuitesLists from '../components/suitesLists'
 import Loading from './loading'
 import SuitesFilter from '../components/suitesFilter'
 import Suitesparams from '../components/suitesparams'
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: "Suites",
+}
 
 interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };

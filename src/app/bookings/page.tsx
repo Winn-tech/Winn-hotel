@@ -1,5 +1,9 @@
 import { getBookings } from '../_lib/services';
 import BookingCard from '../components/bookingCard';
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: "Bookings",
+}
 
 const ReservationPage: React.FC = async () => {
 
