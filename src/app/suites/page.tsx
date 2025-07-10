@@ -9,11 +9,12 @@ export const metadata: Metadata = {
 }
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const Page = ({searchParams}:PageProps) => {
-  const filter = searchParams?.room_class ?? 'all'; 
+const Page = async ({searchParams}:PageProps) => {
+  const params = await searchParams;
+  const filter = params?.room_class ?? 'all'; 
   return (
     <div>
         <h1 className='sm:text-4xl text-2xl my-5 text-primary-950 font-medium'>
