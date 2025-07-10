@@ -5,7 +5,7 @@ import { Facebook, Twitter, Instagram, Mail, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-900 text-white mt-7 px-15">
+    <footer className="bg-primary-900 text-white mt-7 sm:px-15 px-5">
       <div className="max-w-7xl mx-auto px-6 py-12 grid gap-8 grid-cols-1 md:grid-cols-4">
        
         <div>
@@ -15,7 +15,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm text-gray-300">
@@ -26,7 +25,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact Info */}
+       
         <div>
           <h3 className="text-lg font-semibold mb-3">Contact</h3>
           <ul className="text-sm text-gray-300 space-y-2">
@@ -42,7 +41,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Social Media */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
           <div className="flex gap-4">

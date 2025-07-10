@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 import { Room } from '../types';
+import { ChevronsRight } from 'lucide-react';
 
 interface RoomListCardProps {
   room: Room;
@@ -21,9 +22,9 @@ const RoomListCard = ({room}: RoomListCardProps) => {
             <div className='flex justify-between items-center'>
                 <p className='font-bold text-primary-800'>{room.price} per night</p>
                 <Link href={`/suites/${room.id}`}>
-                    <p className=' bg-gradient-to-r from-primary-800 to-accent-500 hover:from-primary-900 hover:to-accent-400 text-sm text-white py-2 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 flex items-center justify-center gap-3 relative overflow-hidden group'>
+                    <p className=' bg-gradient-to-r from-primary-800 to-accent-500 hover:gap-2 hover:from-primary-900 hover:to-accent-400 text-sm text-white py-2 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 flex items-center justify-center gap-1.5 relative overflow-hidden group'>
                     <span>Details</span>
-                    <span></span>
+                    <span><ChevronsRight/></span>
                 </p>
                 </Link>
             </div>

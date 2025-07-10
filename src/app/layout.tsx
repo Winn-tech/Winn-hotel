@@ -37,7 +37,7 @@ export default function RootLayout({
        <MainProvider>
            <Navbar/>
            <Sidebar/>
-        <main className="px-15">
+        <main className="sm:px-15 px-5 max-w-full">
            {children}
            <ToastProvider />
         </main>

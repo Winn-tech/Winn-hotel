@@ -41,7 +41,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-4 sm:p-6 bg-gray-50 min-h-screen m-5">
+    <div className="w-full mx-auto p-4 sm:p-6 bg-gray-50 sm:min-h-screen m-5">
       <div className="mb-6 sm:mb-8">
         <div className="inline-block bg-gradient-to-r from-primary-800 to-accent-700 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full">
           <h1 className="text-base sm:text-lg font-medium">Frequently Asked Questions</h1>

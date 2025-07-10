@@ -7,12 +7,7 @@ import { redirect } from 'next/navigation';
 
 const HotelHeroSection = () => {
   const { selected, guests, setGuests  } = useMainContext();
-  // const [searchData, setSearchData] = useState({
-  //   destination: '',
-  //   checkIn: '',
-  //   checkOut: '',
-  //   guests: 2
-  // });
+ 
   const [isLoading, setIsLoading] = useState(false);
   const [showDate, setDate] = useState(false);
   
@@ -20,7 +15,7 @@ const HotelHeroSection = () => {
   const formatDateForDisplay = (date: Date | string | null | undefined):string => {
     if (!date) return 'Select Date';
     if (date instanceof Date) {
-      return date.toLocaleDateString(); // or use toISOString().split('T')[0] for YYYY-MM-DD format
+      return date.toLocaleDateString(); 
     }
     return date.toString();
   };

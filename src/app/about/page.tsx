@@ -18,13 +18,13 @@ export default function AboutPage() {
 
      <div className="px-4 sm:px-6 lg:px-8">
        <div className="sm:grid grid-cols-3 gap-2 sm:gap-4 py-4 rounded-xl block overflow-hidden">
-        <div className="col-span-2 row-span-2 rounded-xl overflow-hidden relative h-[35vh] xs:h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[75vh]">
+        <div className="col-span-2 row-span-2 rounded-xl overflow-hidden relative h-[30vh] xs:h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[75vh]">
           <Image 
             src={mainImage} 
             alt="Room 1" 
             fill
             className="rounded-xl object-cover"
-            priority
+            // priority
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 66vw, (max-width: 1024px) 60vw, 50vw"
           />
         </div>

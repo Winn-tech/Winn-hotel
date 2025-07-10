@@ -35,7 +35,7 @@ const Page = async ({ params }: PageProps) => {
         <p></p>
       </div>
       <div className="sm:grid grid-cols-3 gap-4 py-4 rounded-xl block overflow-hidden ">
-        <div className="col-span-2 row-span-2 rounded-xl overflow-hidden relative h-[45vh] sm:h-[70vh]">
+        <div className="col-span-2 row-span-2 rounded-xl overflow-hidden relative h-[30vh] sm:h-[70vh]">
           <Image 
             src={mainImage} 
             alt="Room 1" 
