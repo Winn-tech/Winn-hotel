@@ -13,6 +13,6 @@ export const config = {
     '/suites',
     '/bookings/:path*',
     '/bookings',
-    '/room/:path*', // If you book from a single room page
+    '/room/:path*', 
   ],
 }

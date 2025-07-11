@@ -29,7 +29,7 @@ const HotelHeroSection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" >
+    <div className="min-h-screen max-h-fit bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" >
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent "></div>
         <div 
