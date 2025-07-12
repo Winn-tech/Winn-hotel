@@ -2,9 +2,7 @@ import { Users } from 'lucide-react';
 import { Room } from '../types';
 import Link from 'next/link';
 import Image from 'next/image';
-// interface suiteProps {
-//     description : st
-// }
+
 const Suitecard = ({description, id, title, room_image, price, max_guests }: Room) => {
     const roomImage = room_image.split(',')
     const image = roomImage[0]
@@ -25,7 +23,7 @@ const Suitecard = ({description, id, title, room_image, price, max_guests }: Roo
                 ${price}/night
               </span>
             </div>
-            <h2 className="text-xl font-semibold text-primary-800">{title}</h2>
+            <h2 className="text-xl font-semibold text-primary-800 mt-2">{title}</h2>
             <p className="text-sm text-primary-600 mt-1 mb-2">{description}</p>
             <p className="text-sm text-primary-700 flex items-center gap-1">
               <Users className="w-4 h-4" /> Max guests: {max_guests}

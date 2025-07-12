@@ -1,11 +1,11 @@
 import React from 'react'
-import {getRooms} from '@/app/_lib/services'
+import { getSuitesWithPagination} from '@/app/_lib/services'
 import RoomListCard from '@/app/components/roomListCard'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const RoomList = async ()  => {
-    const rooms = await getRooms()
-   
-    
+    const rooms = await getSuitesWithPagination() 
   return (
     <section className='py-5'>
         <h3 className='text-primary-700 text-2xl font-bold'>Our rooms:</h3>
@@ -16,6 +16,14 @@ const RoomList = async ()  => {
                 )
             })}
     </div>
+    <Link href='/suites'>
+       <div className='flex justify-end my-9 '>
+       <p className='flex gap-1.5 text-primary-900 hover:text-accent-800'>
+       <span className='font-bold'>See more </span>
+       <span className='text-16px'><ArrowRight/></span>
+     </p>
+    </div>
+    </Link>
     </section>
   )
 }

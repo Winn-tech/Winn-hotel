@@ -30,6 +30,7 @@ export const getSingleRoom = async (roomId: string): Promise<Room> => {
 };
 
 import { createClient } from '@/app/utils/supabase/server'
+import { writer } from 'repl';
 
 export const createBooking = async (booking: Booking) => {
   const supabase = await createClient() 
@@ -104,3 +105,17 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
   return bookingsWithRoomObject ?? [];
 };
 
+
+export const getSuitesWithPagination = async ():Promise<Room[]>=>{
+  
+let { data: rooms, error } = await supabase
+  .from('rooms')
+  .select('*')
+  .range(0, 9)
+
+ if (error) {
+    throw new Error(error?.message)
+  }
+
+  return rooms as Room[]
+}

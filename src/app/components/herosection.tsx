@@ -12,8 +12,16 @@ const HotelHeroSection = () => {
   const [showDate, setDate] = useState(false);
   
   // Helper function to format date for display
-  const formatDateForDisplay = (date: Date | string | null | undefined):string => {
-    if (!date) return 'Select Date';
+  const formatStartDate = (date: Date | string | null | undefined):string => {
+    if (!date) return 'Check in';
+    if (date instanceof Date) {
+      return date.toLocaleDateString(); 
+    }
+    return date.toString();
+  };
+
+  const formatEndDate = (date: Date | string | null | undefined):string => {
+    if (!date) return 'check out';
     if (date instanceof Date) {
       return date.toLocaleDateString(); 
     }
@@ -68,7 +76,7 @@ const HotelHeroSection = () => {
                     type="text"
                     placeholder="Check In Date"
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 focus:scale-105"
-                    value={formatDateForDisplay(selected?.from)}
+                    value={formatStartDate(selected?.from)}
                     onClick={() => setDate(!showDate)}
                     readOnly
                   />
@@ -80,7 +88,7 @@ const HotelHeroSection = () => {
                     type="text"
                     placeholder="Check Out Date"
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 focus:scale-105"
-                    value={formatDateForDisplay(selected?.to)}
+                    value={formatEndDate(selected?.to)}
                     // onChange={(e) => setSearchData({...searchData, checkOut: e.target.value})}
                     onClick={() => setDate(!showDate)}
                     readOnly

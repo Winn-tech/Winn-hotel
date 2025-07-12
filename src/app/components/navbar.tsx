@@ -49,11 +49,11 @@ const Navbar = () => {
   }
   
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-10 sm:px-10">
+    <header className="bg-white shadow-sm sticky top-0 sm:px-10 z-20">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-5">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center" >
+            <Link href="/" className="flex items-center z-10" >
               <div className='sm:h-[70px] h-[50px] w-[50px] sm:w-[70px] relative'>
               <Image alt='logo' fill src='https://ftdxflkcjyiawkvbdgmx.supabase.co/storage/v1/object/sign/logo/ChatGPT%20Image%20Jun%206,%202025,%2001_22_58%20PM.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9mZjMwYTVlMS1kMzNlLTQzZDQtYjkyNS0xYmE3MzcxZGE5ZjMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvL0NoYXRHUFQgSW1hZ2UgSnVuIDYsIDIwMjUsIDAxXzIyXzU4IFBNLnBuZyIsImlhdCI6MTc1MDA3OTMxNiwiZXhwIjoxNzgxNjE1MzE2fQ.ofDtvLgcx4Oa-s9WT3YUCS7T8odwBUBP8mv642ojKh0'/>
               </div>

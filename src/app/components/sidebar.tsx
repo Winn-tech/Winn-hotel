@@ -14,8 +14,8 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-full bg-gradient-to-r from-primary-600 to-accent-500 text-white flex flex-col transition-transform duration-300 z-40
-          ${collapsed ? '-translate-x-full h w-0' : 'translate-x-0 w-75'}`}
+        className={`fixed top-0 left-0 h-full bg-gradient-to-r from-primary-600 to-accent-500 text-white flex flex-col overflow-hidden transition-transform duration-300 z-40
+          ${collapsed ? '-translate-x-full w-0 h-full p-0 m-0 border-0 shadow-none' : 'translate-x-0 w-75 border-b border-gray-700 shadow-lg'}`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <h1 className="text-lg font-bold whitespace-nowrap overflow-hidden">WinnHotels</h1> 
