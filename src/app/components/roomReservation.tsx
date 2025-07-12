@@ -28,7 +28,7 @@ const RoomReservation : React.FC<RoomReservationProps > = ({ id, title, price , 
     : 1;
   const totalPrice = price *  numNights;
 
-  // Sync selectedGuests with context.setGuests
+  
   useEffect(() => {
     if (setGuests) {
       const guestsNumber = selectedGuests ? parseInt(selectedGuests) : undefined;

@@ -24,7 +24,7 @@ const Navbar = () => {
   const {isLoggedIn, setIsLoggedIn} = useMainContext();
   const {setCollapsed} = useMainContext()
 
- 
+  const router = useRouter();
   const isActiveLink = (link: string) => {
     if (link === '/') {
       return pathname === '/';
@@ -37,7 +37,7 @@ const Navbar = () => {
       await logout();
       setIsLoggedIn(false);
       toast.warn('Logging Out');
-      const router = useRouter();
+     
       router.push('/');
     } catch (error) {
       console.error('Logout failed:', error);
@@ -78,7 +78,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <aside className='flex flex-col justify-center items-center'>
                 <button onClick={handlelogout} className="text-primary-700 hover:text-accent-500">
-                <LogOut className='w-5 h-5' />
+                <LogOut className='w-4 h-4' />
               </button>
                <span className='text-[13px]' >Log Out</span>
               </aside>
@@ -86,7 +86,7 @@ const Navbar = () => {
               <Link href="/login" className="text-primary-700 hover:text-accent-500">
                 <aside className='flex flex-col justify-center items-center'>
                    <button className="text-primary-700 hover:text-accent-500 ">
-                    <LogIn className='w-5 h-5'/>
+                    <LogIn className='w-4 h-4'/>
                   </button>
                 </aside>
                 <span className='text-[13px]'>Log in</span>

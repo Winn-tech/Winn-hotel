@@ -93,6 +93,7 @@ const HotelHeroSection = () => {
                     className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-transparent transition-all duration-300 group-hover:bg-white/20 appearance-none focus:scale-105"
                     value={guests}
                     onChange={(e) => setGuests(parseInt(e.target.value))}
+                    onClick={() => setDate(false)}
                   >
                     <option value={1} className="bg-accent-200">1 Guest</option>
                     <option value={2} className="bg-accent-200">2 Guests</option>
