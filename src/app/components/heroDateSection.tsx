@@ -8,7 +8,7 @@ const HeroDateSection = () => {
       const maxBookingLength = 10
       const defaultClassNames = getDefaultClassNames();
   return (
-    <div  className='sm:w-[80%] w-[95%] h-fit overflow-y-auto' >
+    <div  className='sm:w-[80%] w-[95%] h-[100%] overflow-y-auto' >
          <DayPicker
                 mode="range"
                 selected={selected}

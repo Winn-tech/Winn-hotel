@@ -4,8 +4,9 @@ import Image from 'next/image'
 import {logout} from '@/app/_lib/actions'
 import {toast} from 'react-toastify'
 import { usePathname } from 'next/navigation'
-import { LogOut, Menu } from 'lucide-react';
+import { LogOut,LogIn, Menu } from 'lucide-react';
 import { useMainContext } from './context'
+import { useRouter } from 'next/navigation';
 
 interface NavProperties {
   label : string
@@ -35,7 +36,9 @@ const Navbar = () => {
     try {
       await logout();
       setIsLoggedIn(false);
-      toast.success('Logout successful!');
+      toast.warn('Logging Out');
+      const router = useRouter();
+      router.push('/');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -73,12 +76,20 @@ const Navbar = () => {
           </nav>
           <div className="flex items-center space-x-4">
             {isLoggedIn ? (
-              <button onClick={handlelogout} className="text-primary-700 hover:text-accent-500">
-                <LogOut className='w-6 h-6' />
+              <aside className='flex flex-col justify-center items-center'>
+                <button onClick={handlelogout} className="text-primary-700 hover:text-accent-500">
+                <LogOut className='w-5 h-5' />
               </button>
+               <span className='text-[13px]' >Log Out</span>
+              </aside>
             ) : (
               <Link href="/login" className="text-primary-700 hover:text-accent-500">
-                Login
+                <aside className='flex flex-col justify-center items-center'>
+                   <button className="text-primary-700 hover:text-accent-500 ">
+                    <LogIn className='w-5 h-5'/>
+                  </button>
+                </aside>
+                <span className='text-[13px]'>Log in</span>
               </Link>
             )}
             <button

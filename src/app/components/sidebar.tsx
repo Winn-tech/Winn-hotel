@@ -15,13 +15,13 @@ const Sidebar: React.FC = () => {
     <>
       <div
         className={`fixed top-0 left-0 h-full bg-gradient-to-r from-primary-600 to-accent-500 text-white flex flex-col transition-transform duration-300 z-40
-          ${collapsed ? '-translate-x-full w-0' : 'translate-x-0 w-75'}`}
+          ${collapsed ? '-translate-x-full h w-0' : 'translate-x-0 w-75'}`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <h1 className="text-lg font-bold whitespace-nowrap overflow-hidden">WinnHotels</h1> 
           <button
             onClick={toggleSidebar} 
-            className="p-2 rounded hover:bg-gray-700 focus:outline-none"
+            className= {`p-2 rounded hover:bg-gray-700 focus:outline-none ${collapsed ? 'hidden' : 'block'}`}
             aria-label="Close sidebar"
           >
             <X size={24} />

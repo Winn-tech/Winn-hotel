@@ -15,6 +15,7 @@ const Page = () => {
   async function handleLogin(formData: FormData) {
     try {
       await login(formData)
+      toast.success('Login successful! Welcome back.')
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
@@ -34,10 +35,12 @@ const Page = () => {
       },
       
     })
-    toast.success('Login successful! Welcome back.');
     if (error) {
       console.error('Error signing in with Google:', error.message)
       setError(error.message)
+       toast.error('Something went wrong');
+    } else {
+      toast.success('Login successful! Welcome back.');
     }
   } catch (err: unknown) {
     console.error('Google login error:', err)
