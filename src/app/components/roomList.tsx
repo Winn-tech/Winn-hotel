@@ -18,7 +18,7 @@ const RoomList = async ()  => {
     </div>
     <Link href='/suites'>
        <div className='flex justify-end my-9 '>
-       <p className='flex gap-1.5 text-primary-900 hover:text-accent-800'>
+       <p className='flex gap-1.5 text-primary-900 hover:text-accent-800 hover:gap-2'>
        <span className='font-bold'>See more </span>
        <span className='text-16px'><ArrowRight/></span>
      </p>

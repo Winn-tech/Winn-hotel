@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { createClient } from '../../utils/supabase/server';
+import { updateBookingStatus } from '@/app/_lib/services';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
         // Update the booking status to true (or 'paid', 'completed', etc.)
         const { data, error } = await supabase
           .from('bookings')
-          .update({ status: true }) // or status: 'paid'
+          .update({ status: 'paid' })
           .eq('id', bookingId)
           .select();
 
@@ -68,20 +69,7 @@ export async function GET(req: Request) {
       const bookingId = session.metadata?.booking_id;
 
       if (bookingId) {
-        const supabase = await createClient();
-
-        const { data, error } = await supabase
-          .from('bookings')
-          .update({ status: 'paid' })
-          .eq('id', bookingId)
-          .select();
-
-        if (error) {
-          console.error('Error updating booking:', error);
-          return NextResponse.json({ error: 'Database update failed' }, { status: 500 });
-        }
-
-        return NextResponse.json({ success: true, data });
+       await updateBookingStatus(bookingId)
       }
     }
 

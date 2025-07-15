@@ -10,12 +10,11 @@ const SuitesLists = async ({filter}: SuitesListsProps) => {
    const suites = await getRooms()
    let filteredSuites:Room[] = [];
    if (filter === 'all') {
-    filteredSuites = suites; // Direct assignment is more efficient
+    filteredSuites = suites; 
   } else {
     filteredSuites = suites.filter((suite) => suite.room_type === filter);
   }
     
-  console.log('Filtered Suites:', filteredSuites);
   return (
     <> 
        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5'>

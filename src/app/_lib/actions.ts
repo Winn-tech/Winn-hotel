@@ -143,3 +143,4 @@ export const deleteBookingAction = async (booking_id: string) => {
     console.log(`Successfully deleted booking ${booking_id}. Revalidating path.`);
     revalidatePath('/bookings');
 };
+

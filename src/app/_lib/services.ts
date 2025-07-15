@@ -2,7 +2,6 @@
 import { supabase } from '@/app/_lib/supabase';
 import { Room, Booking, BookingWithRoom } from '../types';
 
-
 export const getRooms = async (): Promise<Room[]> => {
   const { data: rooms, error } = await supabase
     .from('rooms')
@@ -30,21 +29,20 @@ export const getSingleRoom = async (roomId: string): Promise<Room> => {
 };
 
 import { createClient } from '@/app/utils/supabase/server'
-import { writer } from 'repl';
 
 export const createBooking = async (booking: Booking) => {
-  const supabase = await createClient() 
+  const supabase = await createClient();
 
   const {
-    data: { session },
-    error: sessionError,
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (sessionError || !session?.user?.id) {
+  if (userError || !user?.id) {
     throw new Error('User not authenticated');
   }
 
-  const userId = session.user.id;
+  const userId = user.id;
 
   const { data, error } = await supabase
     .from('bookings')
@@ -58,21 +56,20 @@ export const createBooking = async (booking: Booking) => {
   return data;
 };
 
-
 export const getBookings = async (): Promise<BookingWithRoom[]> => {
   const supabase = await createClient();
 
   const {
-    data: { session },
-    error: sessionError,
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (sessionError || !session?.user?.id) {
-    console.log('Session error or missing user:', sessionError);
+  if (userError || !user?.id) {
+    console.log('User error or missing user:', userError);
     return [];
   }
 
-  const userId = session.user.id;
+  const userId = user.id;
 
   const { data: bookings, error } = await supabase
     .from('bookings')
@@ -96,7 +93,6 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
     throw new Error(`Error fetching bookings: ${error.message}`);
   }
 
-  
   const bookingsWithRoomObject = bookings?.map((booking) => ({
     ...booking,
     room: booking.room && !Array.isArray(booking.room) ? booking.room : booking.room?.[0] ?? null,
@@ -105,17 +101,67 @@ export const getBookings = async (): Promise<BookingWithRoom[]> => {
   return bookingsWithRoomObject ?? [];
 };
 
+export const getSuitesWithPagination = async (): Promise<Room[]> => {
+  const { data: rooms, error } = await supabase
+    .from('rooms')
+    .select('*')
+    .range(0, 9);
 
-export const getSuitesWithPagination = async ():Promise<Room[]>=>{
-  
-let { data: rooms, error } = await supabase
-  .from('rooms')
-  .select('*')
-  .range(0, 9)
-
- if (error) {
-    throw new Error(error?.message)
+  if (error) {
+    throw new Error(error?.message);
   }
 
-  return rooms as Room[]
-}
+  return rooms as Room[];
+};
+
+
+// updating the booking status
+// export const updateBookingStatus = async (bookingId: string) => {
+//   const { data: { user }, error: userError } = await supabase.auth.getUser();
+//   if (userError || !user?.id) throw new Error('Authentication required');
+  
+//   const { data, error } = await supabase
+//     .from('bookings')
+//     .update({ status: 'paid' })
+//     .eq('id', bookingId)
+//     .eq('user_id', user.id)
+//     .select()
+//     .single();
+
+//   if (error) throw new Error(error.message);
+//   return data;
+// };
+
+
+// Updated booking service with flexible authentication
+export const updateBookingStatus = async (bookingId: string, bypassAuth: boolean = false) => {
+  const supabase = await createClient();
+  
+  if (!bypassAuth) {
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user?.id) throw new Error('Authentication required');
+    
+    const { data, error } = await supabase
+      .from('bookings')
+      .update({ status: 'paid' })
+      .eq('id', bookingId)
+      .eq('user_id', user.id)
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+    return data;
+  } else {
+
+    // For webhook use - bypass auth and user_id check
+    const { data, error } = await supabase
+      .from('bookings')
+      .update({ status: 'paid' })
+      .eq('id', bookingId)
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+    return data;
+  }
+};
