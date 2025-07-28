@@ -3,7 +3,16 @@
 import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Mail, Phone } from 'lucide-react';
 
+import { usePathname } from 'next/navigation';
+
 export default function Footer() {
+  const pathname = usePathname();
+  const isAdminRoute = pathname.startsWith('/admin');
+
+  if (isAdminRoute) {
+    return null;
+  }
+
   return (
     <footer className="bg-primary-900 text-white mt-7 sm:px-15 px-5">
       <div className="max-w-7xl mx-auto px-6 py-12 grid gap-8 grid-cols-1 md:grid-cols-4">

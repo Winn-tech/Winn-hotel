@@ -165,3 +165,90 @@ export const updateBookingStatus = async (bookingId: string, bypassAuth: boolean
     return data;
   }
 };
+
+// ADMIN SERVICES.
+
+import supabaseAdmin from '@/app/_lib/supabaseAdmin';
+
+export const getAllRegisteredUsers = async () => {
+  const { data, error } = await supabaseAdmin.auth.admin.listUsers({
+    page: 1,
+    perPage: 100,
+  });
+
+  if (error) throw new Error(error.message);
+  return data.users;
+};
+
+export const fetchDashboardStats = async () => {
+  try {
+    // Get users count
+   let page = 1;
+let totalUsers = 0;
+let done = false;
+
+while (!done) {
+  const { data, error } = await supabaseAdmin.auth.admin.listUsers({
+    page,
+    perPage: 100,
+  });
+
+  if (error) throw new Error(error.message);
+
+  totalUsers += data.users.length;
+
+  if (data.users.length < 100) {
+    done = true; // Last page reached
+  } else {
+    page++; // Go to next page
+  }
+}
+
+
+    // Get rooms count
+    const { count: roomsCount } = await supabaseAdmin
+      .from('rooms')
+      .select('*', { count: 'exact', head: true });
+
+    // Get bookings count
+    const { count: bookingsCount } = await supabaseAdmin
+      .from('bookings')
+      .select('*', { count: 'exact', head: true });
+
+    // Get available rooms
+    const { count: availableRooms } = await supabaseAdmin
+      .from('rooms')
+      .select('*', { count: 'exact', head: true })
+      .eq('availability', true);
+
+   
+    // Calculate monthly revenue (confirmed bookings this month)
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    const { data: monthlyBookings } = await supabase
+      .from('bookings')
+      .select('total_amount')
+      .eq('status', 'confirmed')
+      .gte('created_at', startOfMonth.toISOString());
+
+    const monthlyRevenue = monthlyBookings?.reduce((sum, booking) => sum + (booking.total_amount || 0), 0) || 0;
+
+    return {
+      totalUsers: totalUsers || 0,
+      totalRooms: roomsCount || 0,
+      totalBookings: bookingsCount || 0,
+      monthlyRevenue,
+      availableRooms: availableRooms || 0
+    };
+  } catch (error) {
+    console.error('Error fetching stats:', error);
+    return {
+      totalUsers: 0,
+      totalRooms: 0,
+      totalBookings: 0,
+      occupancyRate: 0,
+      monthlyRevenue: 0,
+      availableRooms: 0
+    };
+  }
+};

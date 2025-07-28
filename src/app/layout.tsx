@@ -18,7 +18,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // title: "Winn-Hotels",
   title :{
     template: '%s || Winn Hotels',
     default : 'Winn Hotel'
@@ -28,9 +27,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -43,7 +44,6 @@ export default function RootLayout({
         </main>
         <Footer />
        </MainProvider>
-       
       </body>
     </html>
   );

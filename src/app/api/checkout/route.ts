@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         },
       ],
       metadata: {
-        booking_id: id,
+        booking_id: id, 
       },
       success_url: `${req.headers.get('origin')}/success`,
       cancel_url: `${req.headers.get('origin')}/cancel`,
