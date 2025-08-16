@@ -63,7 +63,7 @@ const Dashboard = async () => {
     <div className="space-y-6">
       <DashboardHeader />
       <StatsGrid stats={stats} />
-      <QuickActions />
+      {/* <QuickActions /> */}
     </div>
   );
 };

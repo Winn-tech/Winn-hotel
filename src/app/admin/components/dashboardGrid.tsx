@@ -11,7 +11,7 @@ export interface StatCardProps {
 
 const StatCard = ({ title, value, icon: Icon, color, bgColor, textColor }: StatCardProps) => {
   return (
-    <div className={`${bgColor} rounded-xl shadow-sm p-6 transition-all hover:shadow-md`}>
+    <div className={`${bgColor} rounded-xl shadow-sm p-5 transition-all hover:shadow-md`}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <p className={`text-sm font-medium ${textColor} opacity-80`}>

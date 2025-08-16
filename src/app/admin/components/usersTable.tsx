@@ -65,7 +65,7 @@ const UsersTable = ({ initialUsers }: UsersTableProps) => {
                 <tr key={user.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-full bg-primary-300 flex items-center justify-center">
                         <span className="text-white font-medium text-sm">
                           {fullName?.charAt(0) || user.email?.charAt(0).toUpperCase() || ''}
                         </span>
@@ -82,13 +82,13 @@ const UsersTable = ({ initialUsers }: UsersTableProps) => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <Mail size={16} className="text-gray-400 mr-2" />
+                      <Mail size={16} className="text-accent-400 mr-2" />
                       <span className="text-sm text-gray-900">{user.email || 'N/A'}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <Calendar size={16} className="text-gray-400 mr-2" />
+                      <Calendar size={16} className="text-accent-400 mr-2" />
                       <span className="text-sm text-gray-900">
                         {new Date(user.created_at).toLocaleDateString()}
                       </span>

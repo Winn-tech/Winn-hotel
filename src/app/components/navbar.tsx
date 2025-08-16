@@ -21,6 +21,7 @@ const pages: NavProperties[] = [
 
 const Navbar = () => {
   const pathname = usePathname();
+  
   const {isLoggedIn, setIsLoggedIn} = useMainContext();
   const {setCollapsed} = useMainContext()
 
@@ -47,6 +48,14 @@ const Navbar = () => {
   const openSideBar = () =>{
     setCollapsed(false)
   }
+
+  
+  // const isAdminRoute = pathname.startsWith('/admin');
+
+  // if (isAdminRoute) {
+  //   return null;
+  // }
+
   
   return (
     <header className="bg-white shadow-sm sticky top-0 sm:px-10 z-20">

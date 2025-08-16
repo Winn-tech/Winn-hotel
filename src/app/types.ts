@@ -25,17 +25,68 @@ export type Booking = {
 
 export type BookingWithRoom = {
   id: string;
-  check_in_date?: string;
-  check_out_date?: string;
-  total_price?: number;
-  num_nights?: number;
-  num_guests?: number;
+  check_in_date: string;
+  check_out_date: string;
+  total_price: number;
+  num_nights: number;
+  num_guests: number;
   status: string;
-  room?: {
-    room_type?: string;
+  created_at?: string;
+  special_requests?: string;
+  room: {
+    room_type: string;
     title: string;
     room_image: string;
+    room_number?: string;
+    price_per_night?: number;
   } | null;
+  user?: {
+    email: string;
+    full_name?: string;
+  } | null;
+};
+
+export type AdminBooking = {
+  id: string;
+  check_in_date: string;
+  check_out_date: string;
+  total_price: number;
+  num_nights: number;
+  status: string;
+  num_guests: number;
+  created_at?: string;
+  special_requests?: string;
+  room: {
+    room_type: string;
+    title: string;
+    room_image: string;
+  }[];
+  user: {
+    email: string;
+  }[];
+};
+
+export type NormalizedBooking = {
+  id: string;
+  check_in_date: string;
+  check_out_date: string;
+  total_price: number;
+  num_nights: number;
+  status: string;
+  num_guests: number;
+  created_at?: string;
+  special_requests?: string;
+  room?: {
+    room_type: string;
+    title: string;
+    room_image: string;
+    room_number?: string;
+    price_per_night?: number;
+  };
+  user?: {
+    email: string;
+    full_name?: string;
+  };
 };
 
 export type Users ={
@@ -48,7 +99,6 @@ export type Users ={
   raw_user_meta_data?: {
     full_name?: string;
   };
-  // Add other required properties from User type
   app_metadata: Record<string, any>;
   aud: string;
 }

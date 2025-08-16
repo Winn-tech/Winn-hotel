@@ -24,7 +24,7 @@ const QuickActions = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <button 
           onClick={handleNewBooking}
-          className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+          className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-500 hover:bg-blue-50 transition-colors"
         >
           <Calendar className="mx-auto mb-2 text-gray-400" size={24} />
           <p className="text-sm font-medium text-gray-700">New Booking</p>

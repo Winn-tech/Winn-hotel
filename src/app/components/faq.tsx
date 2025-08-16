@@ -41,7 +41,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-4 sm:p-6 bg-gray-50 sm:min-h-screen m-5">
+    <div className="w-full mx-auto  sm:py-6 bg-gray-50 sm:min-h-screen my-5">
       <div className="mb-6 sm:mb-8">
         <div className="inline-block bg-gradient-to-r from-primary-800 to-accent-700 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full">
           <h1 className="text-base sm:text-lg font-medium">Frequently Asked Questions</h1>
@@ -51,7 +51,7 @@ const FAQ: React.FC = () => {
      
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
        
-        <div className="p-4 sm:p-6 border-b border-gray-200">
+        <div className="py-4 sm:p-6 border-b border-gray-200">
           <h2 className="text-lg sm:text-xl font-semibold text-primary-900">General</h2>
         </div>
 

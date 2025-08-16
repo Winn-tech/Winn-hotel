@@ -252,3 +252,28 @@ while (!done) {
     };
   }
 };
+
+export const getAllBookings = async () => {
+  const { data, error } = await supabaseAdmin
+    .from('bookings')
+    .select(`
+      id,
+      check_in_date,
+      check_out_date,
+      total_price,
+      num_nights,
+      status,
+      num_guests,
+      room:room_id (
+        room_type,
+        title,
+        room_image
+      ),
+      user:user_id (
+        email
+      )
+    `);
+
+  if (error) throw new Error(error.message);
+  return data;
+};
